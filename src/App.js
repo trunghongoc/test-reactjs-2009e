@@ -1,13 +1,14 @@
 import React from 'react'
-import './App.css'
+import "./assets/main.scss"
+import Table from './components/Table'
 
 class App extends React.Component {
   render() {
-    return (
-      <div>
-        <h1>Tạo component bằng react class</h1>
-      </div>
-    )
+    return (<div>
+      <Table />
+      <Table />
+      <Table />
+    </div>)
   }
 }
 
