@@ -1,8 +1,7 @@
 import React from 'react'
 import Card from './Card'
 import { MyGlobalContext } from './../../context/MyGlobalContext'
-
-
+import MyHOCContext from './MyHOCContext'
 class Input extends React.Component {
   state = {
     value: '',
@@ -45,15 +44,37 @@ class Input extends React.Component {
     const { errorMessage, value } = this.state
 
     return (
-      <div>
-        <label>{this.props.label}</label>
-        <input value={value} onChange={this.onChange} type={this.props.type} />
-
+      <>
+      <MyGlobalContext.Consumer>
         {
-          errorMessage &&
-          <p style={{ color: 'red' }}>{errorMessage}</p>
+          globalContextValue => (
+            <div>
+              <label>{this.props.label}</label>
+              <input value={value} onChange={this.onChange} type={this.props.type} />
+
+              {
+                errorMessage &&
+                <p style={{ color: 'red' }}>{errorMessage}</p>
+              }
+              <p>{globalContextValue.name}</p>
+
+              <hr />
+              <MyHOCContext.Consumer>
+                {
+                  hocContextValue => (
+                    <h2>{hocContextValue.name}</h2>
+                  )
+                }
+              </MyHOCContext.Consumer>
+
+              <button
+                onClick={() => globalContextValue.changeAge(globalContextValue.age + 1)}
+              >CHANGE AGE</button>
+            </div>
+          )
         }
-      </div>
+      </MyGlobalContext.Consumer>
+      </>
     );
   }
 }
@@ -76,7 +97,7 @@ const InputCardHOC = MyComponent => class _InputCard extends React.Component {
     );
   }
 }
-Input.contextType = MyGlobalContext
+// Input.contextType = MyGlobalContext
 
 export default Input
 export const InputCard = InputCardHOC(Input)

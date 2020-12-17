@@ -14,14 +14,36 @@ class App extends React.Component {
     }
   }
 
+  changeGlobalContextName = event => {
+    const { value } = event.target
+    this.setState({
+      contextValue: {
+        ...this.state.contextValue,
+        name: value
+      }
+    })
+  }
+
+  changeAge = value => {
+    this.setState({
+      contextValue: {
+        ...this.state.contextValue,
+        age: value
+      }
+    })
+  }
+
   render() {
     const { contextValue } = this.state
 
+
     return (
-      <MyGlobalContext.Provider value={contextValue}>
+      <MyGlobalContext.Provider value={{ ...contextValue, changeAge: this.changeAge }}>
         <MyRef />
 
         <MyHOC />
+
+        <input onChange={this.changeGlobalContextName} />
       </MyGlobalContext.Provider>
     )
   }
