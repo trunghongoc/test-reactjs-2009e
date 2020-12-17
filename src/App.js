@@ -1,51 +1,20 @@
-import React from 'react'
-import './App.css'
-// import Form from './components/unit-20/Form'
-// import UserList from './components/unit-20/UserList'
-// import MyRef from './components/unit-21-home/MyRef'
-// import MyHOC from './components/unit-21-home/MyHOC'
-import Form from './components/unit-22-home/Form'
+import React, { useState } from 'react'
+import Form from './components/unit-22-home/functionComponents/Form'
 
-import { MyGlobalContext } from './context/MyGlobalContext'
-class App extends React.Component {
-  state = {
-    contextValue: {
-      name: 'Nguyen Van A',
-      age: 20
-    }
-  }
+const App = () => {
+  const [isShowForm, setIsShowForm] = useState(true)
 
-  changeName = event => {
-    const { value } = event.target
-
-    this.setState({
-      contextValue: {
-        ...this.state.contextValue,
-        name: value
-      }
-    })
-  }
-
-  changeAge = newValue => {
-    this.setState({
-      contextValue: {
-        ...this.state.contextValue,
-        age: newValue
-      }
-    })
-  }
-
-  render() {
-    const { contextValue } = this.state
-
-    return (
-      <MyGlobalContext.Provider value={{...contextValue, changeAge: this.changeAge}}>
+  return (
+    <>
+      <h1>My Component</h1>
+      {
+        isShowForm &&
         <Form />
+      }
 
-        <input value={contextValue.name} onChange={this.changeName} />
-      </MyGlobalContext.Provider>
-    )
-  }
+      <button onClick={() => setIsShowForm(!isShowForm)}>TOGGLE SHOW FORM</button>
+    </>
+  )
 }
 
 export default App
