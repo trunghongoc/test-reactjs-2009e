@@ -2,8 +2,9 @@ import React from 'react'
 import './App.css'
 // import Form from './components/unit-20/Form'
 // import UserList from './components/unit-20/UserList'
-import MyRef from './components/unit-21-home/MyRef'
-import MyHOC from './components/unit-21-home/MyHOC'
+// import MyRef from './components/unit-21-home/MyRef'
+// import MyHOC from './components/unit-21-home/MyHOC'
+import Form from './components/unit-22-home/Form'
 
 import { MyGlobalContext } from './context/MyGlobalContext'
 class App extends React.Component {
@@ -14,8 +15,9 @@ class App extends React.Component {
     }
   }
 
-  changeGlobalContextName = event => {
+  changeName = event => {
     const { value } = event.target
+
     this.setState({
       contextValue: {
         ...this.state.contextValue,
@@ -24,11 +26,11 @@ class App extends React.Component {
     })
   }
 
-  changeAge = value => {
+  changeAge = newValue => {
     this.setState({
       contextValue: {
         ...this.state.contextValue,
-        age: value
+        age: newValue
       }
     })
   }
@@ -36,14 +38,11 @@ class App extends React.Component {
   render() {
     const { contextValue } = this.state
 
-
     return (
-      <MyGlobalContext.Provider value={{ ...contextValue, changeAge: this.changeAge }}>
-        <MyRef />
+      <MyGlobalContext.Provider value={{...contextValue, changeAge: this.changeAge}}>
+        <Form />
 
-        <MyHOC />
-
-        <input onChange={this.changeGlobalContextName} />
+        <input value={contextValue.name} onChange={this.changeName} />
       </MyGlobalContext.Provider>
     )
   }
