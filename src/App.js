@@ -4,7 +4,8 @@ import axios from 'axios'
 // import ClipLoader from 'react-spinners/ClipLoader'
 // import UserList from './components/unit-23/UserList'
 import 'antd/dist/antd.css' // or 'antd/dist/antd.less'
-import TestUseMemo from './components/unit-23/TestUseMemo'
+import TestUseMemo from './components/unit-24/TestUseMemo'
+import MyTable from './components/unit-24/Table'
 
 const App = () => {
   const h1 = useRef(null)
@@ -34,16 +35,8 @@ const App = () => {
 
   return (
     <MyGlobalContext.Provider value={gContext}>
-      <h1 ref={h1}>Buổi 23</h1>
-      {/* { gContext.user && <UserList />} */}
-
-      {/* <ClipLoader
-        css={{}}
-        size={150}
-        color={"#123abc"}
-        loading={loading}
-      /> */}
-      <TestUseMemo />
+      <h1 ref={h1}>Buổi 24</h1>
+      <MyTable />
     </MyGlobalContext.Provider>
   )
 }
